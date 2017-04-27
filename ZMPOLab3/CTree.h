@@ -1,5 +1,6 @@
 #pragma once
 #include "CTreeNode.h"
+#include "Constants.h"
 #include <queue>
 #include <map>
 
@@ -20,9 +21,11 @@ private:
 
 	
 	bool b_is_digit(string &sToCheck);
+	bool b_is_digit(char cToCheck);
+	bool b_is_number(string &sToCheck);
 	bool b_is_unary_opeartor(string &sToCheck);
 	bool b_is_binary_operator(string &sToCheck);
-	void v_in_order(CTreeNode *pcTreeNode, string &sAccumulator);
+	void v_build_in_order_traversal(CTreeNode *pcTreeNode, string &sAccumulator);
 	bool b_is_variable(string &sToCheck);
 	double d_evaluate(CTreeNode *pcTreeNode);
 	double d_evaluate_binary_operator(CTreeNode *pcTreeNode);
@@ -41,6 +44,9 @@ public:
 	*/
 	class CErrorInfo
 	{
+	private:
+
+	public:
 		int iPosition;
 		int iErrorIndex;
 		string sValue;
@@ -48,10 +54,11 @@ public:
 
 	CTree();
 	~CTree();
+	void v_delete_existing_tree();
 	void v_check_parse_errors(queue<string>& pcExpressionQueue, vector<CTree::CErrorInfo>& pvErrorVector, int i_position);
 	void v_assign_node(CTreeNode* pcFirstNode, CTreeNode* pcSecondNode);
 	void vBuildTree(queue <string> &cExpressionQueue, vector<CErrorInfo> &pvErrorVector);
-	string sInOrder();
+	string sGetInOrderTraversal();
 	double dEvaluate();
 	string sGetVariables();
 	string sGetInfixExpression();

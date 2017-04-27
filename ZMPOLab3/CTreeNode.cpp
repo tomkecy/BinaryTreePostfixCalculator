@@ -2,13 +2,13 @@
 
 
 
-CTreeNode::CTreeNode(string sValue, CTreeNode *pcParentNode)
+CTreeNode::CTreeNode(std::string sValue, CTreeNode *pcParentNode)
 {
 	s_value = sValue;
 	pc_parent = pcParentNode;
 	pc_right_child = NULL;
 	pc_left_child = NULL;
-}//CTreeNode::CTreeNode(string sValue, CTreeNode *pcParentNode)
+}//END of CTreeNode constructor
 
 CTreeNode::CTreeNode(CTreeNode &pcOther)
 {
@@ -17,10 +17,7 @@ CTreeNode::CTreeNode(CTreeNode &pcOther)
 	pc_left_child = new CTreeNode(*pc_left_child);
 	pc_right_child = new CTreeNode(*pc_right_child);
 	
-}
-
-
-
+}//END of CTreeNode constructor
 
 CTreeNode::~CTreeNode()
 {
@@ -28,13 +25,11 @@ CTreeNode::~CTreeNode()
 	{
 		delete pc_left_child;
 		
-	}//if (pc_left_child != NULL)
+	}
 
 	if (pc_right_child != NULL)
 	{
 		delete pc_right_child;
-	}//if (pc_right_child != NULL)
+	}
 
-
-
-}//CTreeNode::~CTreeNode()
+}//END of ~CTreeNode

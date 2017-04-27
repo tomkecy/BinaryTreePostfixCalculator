@@ -187,7 +187,7 @@ void CUserInterface::v_print_postfix_form()
 
 void CUserInterface::v_print_in_order()
 {
-	cout << "InOrder: " << c_tree.sInOrder() << endl;
+	cout << "InOrder: " << c_tree.sGetInOrderTraversal() << endl;
 }//void CUserInterface::v_print_in_order()
 
 void CUserInterface::v_swap_test()
