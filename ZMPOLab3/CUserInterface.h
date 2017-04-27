@@ -36,4 +36,4 @@ public:
 
 	
 	
-};//class CUserInterface
+};//END OF class CUserInterface

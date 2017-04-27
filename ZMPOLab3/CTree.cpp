@@ -71,12 +71,12 @@ CTreeNode* CTree::v_build_subtree(queue<string> &pcExpressionQueue, int iPositio
 	if (pcExpressionQueue.empty())
 	{
 		pc_result_node = new CTreeNode("1", pcParentNode);
-		CErrorInfo sct_error;
-		sct_error.iErrorIndex = I_NUM0;
-		sct_error.iPosition = i_expression_queue_length - iPosition;
-		sct_error.sValue = pcParentNode->s_value;
+		CErrorInfo c_error;
+		c_error.iErrorIndex = CErrorInfo::I_MISSING_OPERAND;
+		c_error.iPosition = i_expression_queue_length - iPosition;
+		c_error.sValue = pcParentNode->s_value;
 
-		pvErrorVector.push_back(sct_error);
+		pvErrorVector.push_back(c_error);
 		
 	}
 	else
@@ -196,25 +196,27 @@ double CTree::dEvaluate()
 
 double CTree::d_evaluate(CTreeNode *pcTreeNode)
 {
+	//Return leaf value
 	if (pcTreeNode->pc_left_child == NULL && pcTreeNode->pc_right_child == NULL)
 	{
 		if(b_is_variable(pcTreeNode->s_value))
 		{
 			return c_variables[pcTreeNode->s_value];
-		}//if(b_is_letter(pcTreeNode->s_value))
-		else
-			return stod(pcTreeNode->s_value);
-	}//if (pcTreeNode->pc_left_child == NULL && pcTreeNode->pc_right_child == NULL)
+		}
+		return stod(pcTreeNode->s_value);
+	}
 
-	else if (pcTreeNode->pc_left_child != NULL && pcTreeNode->pc_right_child != NULL)
+	//Evaluate binary operation
+	if (pcTreeNode->pc_left_child != NULL && pcTreeNode->pc_right_child != NULL)
 	{
 		return d_evaluate_binary_operator(pcTreeNode);
 	}//else if (pcTreeNode->pc_left_child != NULL && pcTreeNode->pc_right_child != NULL)
 
-	else if (pcTreeNode->pc_left_child != NULL && pcTreeNode->pc_right_child == NULL)
+	//Evaluate unary operation
+	if (pcTreeNode->pc_left_child != NULL && pcTreeNode->pc_right_child == NULL)
 	{
 		return -d_evaluate(pcTreeNode->pc_left_child);
-	}//else if (pcTreeNode->pc_left_child != NULL & pcTreeNode->pc_right_child == NULL)
+	}
 
 	return 0.0;
 }//END of d_evaluate
@@ -409,12 +411,12 @@ void CTree::v_check_parse_errors(queue<string>& pcExpressionQueue, vector<CTree:
 		c_error.iPosition = iPosition--;
 		if (b_is_digit(pcExpressionQueue.front()) || b_is_variable(pcExpressionQueue.front()))
 		{
-			c_error.iErrorIndex = 1;
+			c_error.iErrorIndex = CErrorInfo::I_MISSING_OPERATOR;
 			c_error.sValue = pcExpressionQueue.front();
 		}
 		else
 		{
-			c_error.iErrorIndex = 0;
+			c_error.iErrorIndex = CErrorInfo::I_MISSING_OPERAND;
 			c_error.sValue = pcExpressionQueue.front();
 		}
 

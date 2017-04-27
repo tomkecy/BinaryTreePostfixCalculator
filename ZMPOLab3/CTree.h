@@ -19,34 +19,29 @@ private:
 
 	CTreeNode *v_build_subtree(queue<string> &pcExpressionQueue,int iPosition, vector<CErrorInfo> &pvErrorVector, CTreeNode *pcParentNode);
 
-	
 	bool b_is_digit(string &sToCheck);
 	bool b_is_digit(char cToCheck);
+	bool b_is_variable(string &sToCheck);
 	bool b_is_number(string &sToCheck);
 	bool b_is_unary_opeartor(string &sToCheck);
 	bool b_is_binary_operator(string &sToCheck);
-	void v_build_in_order_traversal(CTreeNode *pcTreeNode, string &sAccumulator);
-	bool b_is_variable(string &sToCheck);
-	double d_evaluate(CTreeNode *pcTreeNode);
-	double d_evaluate_binary_operator(CTreeNode *pcTreeNode);
-	string s_get_infix_expression(CTreeNode *pcTreeNode);
-	string s_get_postfix_expression(CTreeNode *pcTreeNode);
 	bool is_left_child(CTreeNode *pcTreeNode);
 
+	void v_build_in_order_traversal(CTreeNode *pcTreeNode, string &sAccumulator);
+	
+	double d_evaluate(CTreeNode *pcTreeNode);
+	double d_evaluate_binary_operator(CTreeNode *pcTreeNode);
 
+	string s_get_infix_expression(CTreeNode *pcTreeNode);
+	string s_get_postfix_expression(CTreeNode *pcTreeNode);
 
 public:
 
-	/**
-	* iErrorIndex:
-	* 0 - missing operand
-	* 1 - missing operator
-	*/
 	class CErrorInfo
 	{
-	private:
-
 	public:
+		static const int I_MISSING_OPERAND = 0;
+		static const int I_MISSING_OPERATOR = 1;
 		int iPosition;
 		int iErrorIndex;
 		string sValue;
@@ -56,7 +51,6 @@ public:
 	~CTree();
 	void v_delete_existing_tree();
 	void v_check_parse_errors(queue<string>& pcExpressionQueue, vector<CTree::CErrorInfo>& pvErrorVector, int i_position);
-	void v_assign_node(CTreeNode* pcFirstNode, CTreeNode* pcSecondNode);
 	void vBuildTree(queue <string> &cExpressionQueue, vector<CErrorInfo> &pvErrorVector);
 	string sGetInOrderTraversal();
 	double dEvaluate();

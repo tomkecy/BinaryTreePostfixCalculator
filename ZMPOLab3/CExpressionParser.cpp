@@ -5,13 +5,13 @@
 CExpressionParser::CExpressionParser()
 {
 
-}//CExpressionParser::CExpressionParser()
+}//END OF CExpressionParser()
 
 CExpressionParser::~CExpressionParser()
 {
 
 
-}//CExpressionParser::~CExpressionParser()
+}//END OF ~CExpressionParser()
 
 
 queue<string>& CExpressionParser::pcParseExpression(string sExpression, bool &pbIncorrectCharsOccured)
@@ -20,7 +20,7 @@ queue<string>& CExpressionParser::pcParseExpression(string sExpression, bool &pb
 	pbIncorrectCharsOccured = v_split_expression(sExpression, *pc_result_queue);
 
 	return *pc_result_queue;
-}//queue<string>* CExpressionParser::pcParseExpression(string psExpression)
+}//END OF pcParseExpression(string psExpression)
 
 
 bool CExpressionParser::v_split_expression(string &psExpression, char chDelimiter, vector<string> &pvResultVector) 
